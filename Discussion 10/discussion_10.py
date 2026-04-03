@@ -57,8 +57,24 @@ def title_by_year(year, books):
     Returns:
         dictionary: a dict of authors and the titles of their books published in the given year
     """
-    # YOUR CODE HERE
-    pass
+    result = {}
+ 
+    for isbn, isbn_dict in books.items():
+        inner_key = list(isbn_dict.keys())[0]
+        details = isbn_dict[inner_key]['details']
+        if 'publish_date' not in details:
+            continue
+        publish_date = details['publish_date']
+        if str(year) not in publish_date:
+            continue
+        title = details['title']
+        authors = details.get('authors', [])
+        for author in authors:
+            author_name = author['name']
+            if author_name not in result:
+                result[author_name] = []
+            result[author_name].append(title)
+    return result
 
 def publisher_by_letter(letter, books):
     """
