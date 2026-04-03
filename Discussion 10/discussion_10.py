@@ -89,10 +89,20 @@ def publisher_by_letter(letter, books):
         dictionary: publishers whose name begins with the letter and the titles of their books
 
     """
-    # YOUR CODE HERE
-    pass
-
-
+    result = {}
+    for isbn, isbn_dict in books.items():
+        inner_key = list(isbn_dict.keys())[0]
+        details = isbn_dict[inner_key]['details']
+        if 'publishers' not in details:
+            continue
+        title = details['title']
+        publishers = details['publishers']
+        for publisher in publishers:
+            if publisher.startswith(letter):
+                if publisher not in result:
+                    result[publisher] = []
+                result[publisher].append(title)
+    return result
 
 #DO NOT CHANGE TEST CASES
 class TestDiscussion11(unittest.TestCase):
