@@ -32,9 +32,19 @@ def shortest_book(books):
     Returns:
         string: the title of the shortest book
     """
-    # YOUR CODE HERE
-    pass
-
+    shortest_title = None
+    fewest_pages = None
+    for isbn, isbn_dict in books.items():
+        inner_key = list(isbn_dict.keys())[0]
+        details = isbn_dict[inner_key]['details']
+        if 'number_of_pages' not in details:
+            continue
+        pages = details['number_of_pages']
+        title = details['title']
+        if fewest_pages is None or pages < fewest_pages:
+            fewest_pages = pages
+            shortest_title = title
+    return shortest_title
 
 def title_by_year(year, books):
     """
