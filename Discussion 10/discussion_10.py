@@ -13,9 +13,14 @@ def read_json(filename):
     Returns: 
         json dictionary OR an empty dict if the file could not be opened 
     '''
-    # YOUR CODE HERE
-    pass
-
+    try:
+        file = open(filename, 'r')
+        contents = file.read()
+        file.close()
+        data = json.loads(contents)
+        return data
+    except:
+        return {}
 
 def shortest_book(books):
     """
