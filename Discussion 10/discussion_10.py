@@ -14,7 +14,9 @@ def read_json(filename):
         json dictionary OR an empty dict if the file could not be opened 
     '''
     try:
-        file = open(filename, 'r')
+        source_dir = os.path.dirname(__file__)
+        full_path = os.path.join(source_dir, filename)
+        file = open(full_path, 'r')
         contents = file.read()
         file.close()
         data = json.loads(contents)
